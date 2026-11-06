@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>big-AGI — Upgrade Report</title>
+<style>
+:root { --bg:#0a0e14; --panel:#0e141d; --line:#1c2635; --ink:#e8edf5; --dim:#9aa7ba; --faint:#5d6b80; --acc:#4fd8e8; --acc2:#8b7bff; --ok:#52d98b; --warn:#ffb454; }
+* { box-sizing:border-box; }
+body { margin:0; background:radial-gradient(900px 400px at 85% -10%, rgba(139,123,255,.10), transparent 60%), var(--bg); color:var(--ink); font:16px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif; }
+.wrap { max-width:860px; margin:0 auto; padding:28px 18px 70px; }
+a { color:var(--acc); }
+header h1 { font-size:clamp(26px,6vw,38px); margin:6px 0 4px; letter-spacing:-.02em; }
+header h1 span { background:linear-gradient(120deg,#4fd8e8,#8b7bff,#ff7ab8); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.kicker { font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--acc); }
+.links { display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 8px; }
+.pill { display:inline-block; padding:9px 16px; border-radius:12px; font-size:14px; font-weight:600; text-decoration:none; border:1px solid var(--line); background:var(--panel); }
+.pill.new { background:linear-gradient(120deg,#4fd8e8,#8b7bff); color:#071018; border:none; }
+.date { color:var(--faint); font-size:13.5px; }
+h2 { font-size:21px; margin:38px 0 12px; letter-spacing:-.01em; }
+h2 .n { color:var(--acc2); font-size:14px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:2px; }
+table { width:100%; border-collapse:collapse; font-size:14px; }
+th, td { padding:10px 10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--faint); font-size:11.5px; text-transform:uppercase; letter-spacing:.08em; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.delta { font-weight:700; }
+.up { color:var(--ok); } .down { color:#ff6b81; } .flat { color:var(--dim); }
+.why { color:var(--dim); font-size:13px; display:block; margin-top:3px; }
+.totals { display:flex; gap:12px; flex-wrap:wrap; margin:18px 0; }
+.total { flex:1; min-width:150px; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; }
+.total .lab { font-size:11.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--faint); }
+.total .val { font-size:34px; font-weight:800; margin-top:4px; }
+ol.changes { padding-left:22px; margin:0; }
+ol.changes li { margin-bottom:12px; }
+ol.changes b { color:var(--ink); }
+ol.changes span { color:var(--dim); }
+.limits { background:rgba(255,180,84,.06); border:1px solid rgba(255,180,84,.22); border-radius:14px; padding:18px 20px; }
+.limits h2 { margin-top:0; }
+.limits ul { margin:0; padding-left:20px; color:var(--dim); font-size:14.5px; }
+.limits li { margin-bottom:8px; }
+.tag { display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.08em; padding:2px 8px; border-radius:6px; text-transform:uppercase; margin-left:8px; }
+.tag.arch { background:rgba(79,216,232,.12); color:var(--acc); }
+.tag.ui { background:rgba(139,123,255,.14); color:var(--acc2); }
+.tag.feat { background:rgba(82,217,139,.12); color:var(--ok); }
+.tag.perf { background:rgba(255,122,184,.12); color:#ff7ab8; }
+.tag.sec { background:rgba(255,180,84,.12); color:var(--warn); }
+.tag.docs { background:rgba(148,163,184,.14); color:#b8c4d6; }
+footer { margin-top:44px; color:var(--faint); font-size:12.5px; border-top:1px solid var(--line); padding-top:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Repo Rebuild · Upgrade Report</div>
+  <h1>big-AGI <span>→ The Persona Suite</span></h1>
+  <div class="date">November 6, 2026 · rig (prometheus) · branch <code>v2-rebuild</code> @ 84a4eaf96 · old default branch <code>v2-dev</code> untouched</div>
+  <div class="links">
+    <a class="pill" href="https://github.com/QuantumCotton/big-AGI">OLD — repo (no live old version)</a>
+    <a class="pill new" href="https://big-agi-v2.netlify.app">NEW — big-agi-v2.netlify.app</a>
+  </div>
+</header>
+
+<h2><span class="n">Grades</span>Before → After</h2>
+<p style="color:var(--dim);font-size:14px;margin:0 0 14px">Weighted total = Σ(score × weight)/100. Fixed weights. Graded honestly: the old repo is a fork of the excellent upstream big-AGI suite — it scored well. The old fork was never deployed anywhere (verified: zero matching sites across the fleet's 274 Netlify sites).</p>
+
+<table>
+<thead><tr><th>#</th><th>Metric</th><th class="num">W</th><th class="num">Before</th><th class="num">After</th><th class="num">Δ</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Objective Fit<span class="why">B: superb upstream suite, but the fleet fork was never deployed and its one customization (personas) was data-only inside a mid-migration branch · A: the fork's own objective — a live, usable persona-driven suite — is now actually achieved</span></td><td class="num">15</td><td class="num">72</td><td class="num">88</td><td class="num delta up">+16</td></tr>
+<tr><td>2</td><td>UI/UX &amp; Visual Design<span class="why">B: genuinely polished MUI Joy but generic framework look, desktop-first · A: custom "Obsidian Filament" identity, procedural persona sigils, cohesive motion</span></td><td class="num">15</td><td class="num">78</td><td class="num">90</td><td class="num delta up">+12</td></tr>
+<tr><td>3</td><td>Feature Completeness<span class="why">B: chat/beam/calls/draw/news/diff/tokens — huge · A: chat+beam+personas+history+export/import — honest −: upstream's Calls, Draw, News, Diff, Tokens not rebuilt (see Limits)</span></td><td class="num">12</td><td class="num">88</td><td class="num">74</td><td class="num delta down">−14</td></tr>
+<tr><td>4</td><td>Code Organization<span class="why">B: disciplined but 5,335-commit upstream tree, fork edits a root-level file · A: 6 focused modules, clear data/adapter/art/logic separation</span></td><td class="num">12</td><td class="num">82</td><td class="num">88</td><td class="num delta up">+6</td></tr>
+<tr><td>5</td><td>Mobile Experience<span class="why">B: responsive but desktop-density · A: mobile-first, verified at 390px (no h-scroll), safe-area insets, ≥44px targets, bottom sheets</span></td><td class="num">10</td><td class="num">68</td><td class="num">92</td><td class="num delta up">+24</td></tr>
+<tr><td>6</td><td>Performance &amp; Loading<span class="why">B: heavy Next.js bundle + server cold starts · A: zero framework, zero CDN, ~64KB app + 34KB persona data, instant paint, streaming responses</span></td><td class="num">10</td><td class="num">70</td><td class="num">93</td><td class="num delta up">+23</td></tr>
+<tr><td>7</td><td>Security Hygiene<span class="why">B: no committed secrets (verified), BYO keys, optional basic-auth · A: no backend at all = no server attack surface, keys local-only with warnings; BYOK client exposure is inherent to the design (same as old)</span></td><td class="num">8</td><td class="num">75</td><td class="num">85</td><td class="num delta up">+10</td></tr>
+<tr><td>8</td><td>Maintainability<span class="why">B: 494-line edit inside an upstream-owned file = merge-conflict debt, ~700-package tree · A: zero dependencies, no build step, persona data cleanly isolated from logic</span></td><td class="num">8</td><td class="num">58</td><td class="num">87</td><td class="num delta up">+29</td></tr>
+<tr><td>9</td><td>Accessibility<span class="why">B: MUI defaults, unaudited · A: ARIA labels, focus-visible rings, reduced-motion support, semantic controls; still not screen-reader audited</span></td><td class="num">5</td><td class="num">74</td><td class="num">80</td><td class="num delta up">+6</td></tr>
+<tr><td>10</td><td>Documentation &amp; Onboarding<span class="why">B: excellent upstream README+docs · A: tight README (run/structure/laws), NOTES.md with study + grading, this report</span></td><td class="num">5</td><td class="num">88</td><td class="num">85</td><td class="num delta down">−3</td></tr>
+</tbody>
+</table>
+
+<div class="totals">
+  <div class="total"><div class="lab">Weighted · Before</div><div class="val">75</div></div>
+  <div class="total"><div class="lab">Weighted · After</div><div class="val" style="color:var(--acc)">87</div></div>
+  <div class="total"><div class="lab">Delta</div><div class="val up">+12</div></div>
+</div>
+
+<h2><span class="n">Changes</span>Everything that changed</h2>
+<ol class="changes">
+<li><span class="tag arch">Arch</span><b>Zero-backend rebuild.</b> The old app needed a Next.js server, tRPC, Prisma and ~700 npm packages to boot. v2 is a static SPA: 6 ES modules, no build step, no dependencies, deploys to any static host. <span>Nothing to install, nothing to run, nothing to patch.</span></li>
+<li><span class="tag feat">Content</span><b>Zero-loss persona corpus.</b> All 14 personas from the fork's enriched <code>src/data.ts</code> carried over programmatically and verified verbatim: 14 system messages (22.3K chars), 60 example prompts, 55 call starters, 12 ElevenLabs voice ids, the "Featured" flag, and the one upstream persona image (reused for Developer). Extraction script + verification receipts in <code>v2/NOTES.md</code>.</li>
+<li><span class="tag feat">Feat</span><b>BYO-key streaming chat in the browser.</b> Works with any OpenAI-compatible endpoint (OpenAI, OpenRouter, Groq, Z.ai, Ollama, LM Studio — 7 pre-wired, custom base URL on all), plus Anthropic and Google Gemini adapters. Native SSE streaming with a stop button. Keys never leave localStorage; there is no server to leak them to.</li>
+<li><span class="tag feat">Feat</span><b>Beam mode kept.</b> The suite's signature move — one prompt to up to 3 model lanes, streaming side by side in columns, managed from Settings.</li>
+<li><span class="tag feat">Feat</span><b>Persona prompt macros implemented.</b> The old personas ship with big-AGI template macros (<code>{{LLM.Cutoff}}</code>, <code>{{LocaleNow}}</code>, <code>{{RenderMermaid}}</code>, <code>{{PreferTables}}</code>…) — v2 substitutes all of them at send time.</li>
+<li><span class="tag feat">Feat</span><b>Custom personas.</b> Write your own system prompt (macros supported) and start a chat with it — the old app's Custom persona, promoted to a first-class flow.</li>
+<li><span class="tag feat">Feat</span><b>History + data ownership.</b> Conversations persist locally with persona sigils; export/import the entire state as JSON; export any chat as Markdown; one-tap wipe.</li>
+<li><span class="tag ui">UI</span><b>"Obsidian Filament" design system.</b> Custom CSS (no framework): obsidian glass surfaces, cyan→violet→pink gradient identity, streaming caret, thinking indicator, toasts, bottom sheets, micro-transitions. Fleet-bar visual work, not bootstrap-default.</li>
+<li><span class="tag ui">UI</span><b>Procedural persona sigils.</b> No emoji-as-art: every persona gets a deterministic layered-SVG mark (petals, orbits, arcs from a hash of its id) with a per-persona gradient palette — 13 unique sigils generated at runtime, zero image weight.</li>
+<li><span class="tag ui">UI</span><b>Persona gallery as the front door.</b> Fourteen character cards with descriptions and example prompts; one tap opens a chat pre-loaded with that persona's examples as starter chips.</li>
+<li><span class="tag perf">Perf</span><b>~100× smaller payload.</b> Old: multi-MB Next.js bundle + server. New: ~64KB of app code + 34KB persona data + 11KB image, uncompressed, zero CDN calls, instant first paint.</li>
+<li><span class="tag perf">Perf</span><b>Streaming-native markdown renderer</b> written for chat (code fences with copy buttons, tables, lists, quotes) — renders incrementally during generation with no re-parse flicker libraries.</li>
+<li><span class="tag sec">Sec</span><b>Attack surface removed.</b> No backend, no proxy, no database, no Docker image. The old repo's basic-auth middleware problem (protect a server) disappears with the server. No secrets in the repo (verified by grep before commit).</li>
+<li><span class="tag sec">Sec</span><b>Honest key handling.</b> Keys masked in Settings, stored only in localStorage, sent only to the provider you configure, with an explicit warning in the Settings sheet recommending spend-capped keys.</li>
+<li><span class="tag docs">Docs</span><b>Self-documenting ship.</b> README (run, structure, macros, design laws), NOTES.md (study + BEFORE grading with receipts), this upgrade report — all deployed with the app and committed on the branch.</li>
+</ol>
+
+<h2><span class="n">Limits</span>What I did not get to</h2>
+<div class="limits">
+<ul>
+<li><b>Upstream features not rebuilt:</b> Calls (voice chat, ElevenLabs), Draw (image generation UI), News, Diff, Tokens tokenizer, link-chat. The rebuild covers the fork's core identity (personas + chat + beam); those apps are separate builds. Voice ids from the corpus are preserved in the data for a future Calls revival.</li>
+<li><b>No live LLM round-trip tested end-to-end in this session</b> — no spendable vendor key available on the rig for a real completion. The adapters implement documented SSE formats for all three API families and were reviewed line-by-line; the keyless-send guard, error surfaces and beam orchestration were tested with the browser against missing-key paths. First real key may surface provider-specific CORS quirks (noted in-app in the failure message).</li>
+<li><b>Multi-modal inputs</b> (images/files) from the old app are not wired — text-only chats in v2.</li>
+<li><b>Accessibility not screen-reader audited</b> — labeled controls, focus rings and reduced-motion are in; a proper NVDA/VoiceOver pass is owed.</li>
+<li><b>No PWA/service worker</b> — the app is fully functional offline once loaded except LLM calls, but there's no install prompt or offline cache strategy yet.</li>
+<li><b>Conversation search</b> is not implemented (browse + delete only).</li>
+</ul>
+</div>
+
+<footer>
+Rebuilt by Prometheus (rig) · 2026-11-06 · old = no live version (fork was never deployed — verified against the fleet's full Netlify site census) · new = <a href="https://big-agi-v2.netlify.app">big-agi-v2.netlify.app</a> · code on branch <a href="https://github.com/QuantumCotton/big-AGI/tree/v2-rebuild">v2-rebuild</a> · default branch untouched.
+</footer>
+
+</div>
+</body>
+</html>
